@@ -5,4 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :products
+
+  def cart_count
+    $redis.hlen "cart#{id}"
+  end
+
 end

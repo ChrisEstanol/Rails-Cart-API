@@ -15,7 +15,12 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href=""><span class="glyphicon glyphicon-shopping-cart"></span><span class="badge">0</span></a>
+          <%= link_to cart_path do %>
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+            <% if user_signed_in? %>
+              <span class="badge"><%=current_user.cart_count%></span>
+            <% end %>
+          <% end %>
         </li>
         <% if user_signed_in? %>
           <li><%= link_to current_user.email, edit_user_registration_path %></li>

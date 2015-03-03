@@ -1,31 +1,21 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Listing Products</h1>
+<%= link_to 'New Product', new_product_path, class: "btn btn-primary pull-right" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+  <% @products.each do |product| %>
+  <div class="col-md-3">
 
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.title %></td>
-        <td><%= product.description %></td>
-        <td><%= product.price %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <div class="panel panel-default">
+      <div class="panel-body">
+      <%= link_to product_path(product) do %>
+        <h5>Name: <%= product.name %></h5>
+        <p>Description: <%= product.description %></p>
+        <p>Quantity: <%= product.quantity %></p>
+        <p class="pull-right">Price: $<%= product.price %></p>
+        <% end %>
+      </div>
+    </div>
 
-<br>
-
-<%= link_to 'New Product', new_product_path %>
+  </div>
+  <% end %>
+</div>

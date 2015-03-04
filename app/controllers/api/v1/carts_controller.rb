@@ -1,4 +1,4 @@
-class Api::CartsController < ApplicationController
+class Api::V1::CartsController < ApplicationController
   # before_action :authenticate_user!
   # Authenticate with token
 

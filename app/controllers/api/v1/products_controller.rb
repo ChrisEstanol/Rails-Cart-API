@@ -38,7 +38,7 @@ class Api::V1::ProductsController < ApplicationController
 
     def render_unauthorized
       self.headers['WWW-Authenticate'] = 'Token realm="Application"'
-      render json: 'Bad credentials', status: 401
+      render json: 'Wrong authorisation token', status: 401
     end
 
 end

@@ -1,5 +1,5 @@
 class Api::V1::CartsController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate
   # Authenticate with token
 
   def show
@@ -35,4 +35,20 @@ class Api::V1::CartsController < ApplicationController
   def current_user_cart
     "cart#{current_user.id}"
   end
+
+  protected
+    def authenticate
+      authenticate_token || render_unauthorized
+    end
+
+    def authenticate_token
+      authenticate_with_http_token do |token, options|
+        User.find_by(auth_token: token)
+      end
+    end
+
+    def render_unauthorized
+      self.headers['WWW-Authenticate'] = 'Token realm="Application"'
+      render json: 'Wrong authorisation token', status: 401
+    end
 end

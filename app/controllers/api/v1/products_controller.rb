@@ -1,5 +1,6 @@
 class Api::V1::ProductsController < ApplicationController
-  before_action :auth_access
+  before_action :authenticate
+
 
   respond_to :json
 
@@ -23,10 +24,21 @@ class Api::V1::ProductsController < ApplicationController
       respond_with Product.destroy(params[:id])
     end
 
-  private
-    def auth_access
-      api_key = User.find_by_auth_token(params[:auth_token])
-      head :unauthorized unless api_key
+
+  protected
+    def authenticate
+      authenticate_token || render_unauthorized
+    end
+
+    def authenticate_token
+      authenticate_with_http_token do |token, options|
+        User.find_by(auth_token: token)
+      end
+    end
+
+    def render_unauthorized
+      self.headers['WWW-Authenticate'] = 'Token realm="Application"'
+      render json: 'Bad credentials', status: 401
     end
 
 end

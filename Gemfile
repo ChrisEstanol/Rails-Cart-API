@@ -17,11 +17,16 @@ gem 'devise'
 gem 'redis', '~> 3.2.1'
 gem 'hiredis', '~> 0.6.0'
 
+
 group :development, :test do
   gem 'byebug'
-
   gem 'web-console', '~> 2.0'
-
   gem 'spring'
+  gem 'better_errors'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'capybara'
 end
 

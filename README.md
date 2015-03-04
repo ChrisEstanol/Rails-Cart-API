@@ -1,10 +1,12 @@
-### Cart WEB
-* I used Redis for the cart as it seems best practice to not store temporary variables in the database.
+### Cart WEB / API
 
-### Cart API
-* Authorisation token was working up until the last commit when I created new views and used Jbuilder.
+A simple shop App with Cart and API for educational purpose
 
-### Testing
+* Shopping cart web with Redis.
+* Shopping cart API with token authentication
+* JSON camelcase
+* Model and features Testing
+
 
 
 

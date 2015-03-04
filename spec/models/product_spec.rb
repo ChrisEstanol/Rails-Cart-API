@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Cart do
+describe Product do
   it "is invalid when the name is blank" do
     entry = Product.new(name: "")
 

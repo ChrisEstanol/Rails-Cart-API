@@ -11,9 +11,7 @@ module API
          @cart.add_item(CartItem.new(product_id, quantity))
         end
 
-        respond_to do |format|
-          format.json { render json: @cart }
-        end
+        render json: @cart
       end
 
       def add
@@ -21,14 +19,14 @@ module API
         quantity = params[:quantity].to_i
         $redis.hset current_user_cart, product_id, quantity
 
-        redirect_to product_path(product_id), notice: 'Product has been added to your cart.'
+        render json: current_user.cart_count, status: 200
       end
 
       def remove
         product_id = params[:product_id].to_i
         $redis.hdel current_user_cart, product_id
 
-        redirect_to :back, notice: 'Product has been removed from your cart.'
+        render json: current_user.cart_count, status: 200
       end
 
 

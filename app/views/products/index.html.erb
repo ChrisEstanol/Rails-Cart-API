@@ -1,0 +1,21 @@
+<% if signed_in? %>
+<%= link_to 'New Product', new_product_path, class: "btn btn-primary pull-right" %>
+<% end %>
+<div class="row">
+  <% @products.each do |product| %>
+  <div class="col-md-3">
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+      <%= link_to product_path(product) do %>
+        <h5>Name: <%= product.name %></h5>
+        <p>Description: <%= product.description %></p>
+        <p>Quantity: <%= product.quantity %></p>
+        <p class="pull-right">Price: $<%= product.price %></p>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+  <% end %>
+</div>
